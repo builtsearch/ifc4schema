@@ -1,0 +1,12 @@
+[
+  "IfcBuildingElement",
+  "IfcCivilElement",
+  "IfcDistributionElement",
+  "IfcElementAssembly",
+  "IfcElementComponent",
+  "IfcFeatureElement",
+  "IfcFurnishingElement",
+  "IfcGeographicElement",
+  "IfcTransportElement",
+  "IfcVirtualElement"
+]
