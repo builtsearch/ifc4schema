@@ -1,5 +1,7 @@
 [
+  "IfcBuilding",
   "IfcBuildingElement",
+  "IfcBuildingStorey",
   "IfcCivilElement",
   "IfcDistributionElement",
   "IfcElementAssembly",
@@ -7,6 +9,8 @@
   "IfcFeatureElement",
   "IfcFurnishingElement",
   "IfcGeographicElement",
+  "IfcSite",
+  "IfcSpace",
   "IfcTransportElement",
   "IfcVirtualElement"
 ]

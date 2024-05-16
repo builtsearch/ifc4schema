@@ -20,9 +20,15 @@ const ifcElements = schema["xs:complexType"]
 		if (!complexContent) return;
 
 		try {
+			const allowed = ["ifc:IfcElement", "ifc:IfcSpatialStructureElement"];
+
 			const extension = [...complexContent[0]["xs:extension"]][0];
-			if (extension["$"]["base"] !== "ifc:IfcElement") return;
+			const base = extension["$"]["base"];
+			if (!allowed.includes(base)) {
+				return;
+			}
 			const name = x["$"]["name"];
+			console.log(name);
 			return name;
 		} catch (e) {
 			return;
@@ -30,7 +36,7 @@ const ifcElements = schema["xs:complexType"]
 	})
 	.filter((x) => x);
 
-// fs.writeFileSync("./schema/ifcElements.json", JSON.stringify(ifcElements, null, 2));
+fs.writeFileSync("./schema/ifcElements.json", JSON.stringify(ifcElements, null, 2));
 // fs.writeFileSync("./schema/schema.json", JSON.stringify(schema, null, 2));
 
 let n = 0;
@@ -85,7 +91,7 @@ for (const element of ifcElements) {
 }
 
 for (const item of ifc) {
-	console.log(chalk.red(item.entity));
+	// console.log(chalk.red(item.entity));
 	const complexType = schema["xs:complexType"].find((x) => x["$"].name == item.entity);
 	const extension = complexType["xs:complexContent"][0]["xs:extension"][0];
 
@@ -93,14 +99,15 @@ for (const item of ifc) {
 	if (!attribute) continue;
 
 	const type = attribute.find((x) => x["$"].name == "PredefinedType");
+	if (!type) continue;
 	const typeEnum = type["$"].type.replace("ifc:", "");
 
-	console.log(">", typeEnum);
+	// console.log(">", typeEnum);
 	//get preDefinedType
 	const simpleType = schema["xs:simpleType"].find((x) => x["$"].name == typeEnum);
 	const enums = simpleType["xs:restriction"][0]["xs:enumeration"].map((x) => x["$"].value.toUpperCase());
 
-	console.log(enums);
+	// console.log(enums);
 
 	item.predefinedType = enums;
 }

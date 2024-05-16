@@ -1,5 +1,8 @@
 [
   {
+    "entity": "IfcBuilding"
+  },
+  {
     "entity": "IfcBeam",
     "predefinedType": [
       "BEAM",
@@ -258,6 +261,9 @@
       "USERDEFINED",
       "NOTDEFINED"
     ]
+  },
+  {
+    "entity": "IfcBuildingStorey"
   },
   {
     "entity": "IfcCivilElement"
@@ -1345,6 +1351,21 @@
     "entity": "IfcGeographicElement",
     "predefinedType": [
       "TERRAIN",
+      "USERDEFINED",
+      "NOTDEFINED"
+    ]
+  },
+  {
+    "entity": "IfcSite"
+  },
+  {
+    "entity": "IfcSpace",
+    "predefinedType": [
+      "SPACE",
+      "PARKING",
+      "GFA",
+      "INTERNAL",
+      "EXTERNAL",
       "USERDEFINED",
       "NOTDEFINED"
     ]
