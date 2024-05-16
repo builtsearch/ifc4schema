@@ -28,7 +28,6 @@ const ifcElements = schema["xs:complexType"]
 				return;
 			}
 			const name = x["$"]["name"];
-			console.log(name);
 			return name;
 		} catch (e) {
 			return;
@@ -137,4 +136,29 @@ function getNameFromBase(base) {
 		.map((x) => x["$"].name);
 
 	return names;
+}
+
+generateIfcEntityMap();
+
+async function generateIfcEntityMap() {
+	const lines = file.split("\n");
+
+	const entityMap = new Map();
+	for (const line of lines) {
+		const regex = /(Ifc.+?)\"/g;
+		const matches = [...line.matchAll(regex)];
+		if (matches.length) {
+			for (const match of matches) {
+				console.log(match[1]);
+				const value = match[1];
+				const key = value.toUpperCase();
+				if (!entityMap.has(key)) {
+					entityMap.set(key, value);
+				}
+			}
+		}
+	}
+
+	const map = Object.fromEntries(entityMap);
+	fs.writeFileSync("./schema/ifcEntityMap.json", JSON.stringify(map, null, 2));
 }
